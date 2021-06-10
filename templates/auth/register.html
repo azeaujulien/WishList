@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block Title %}
+    Créer un compte
+{% endblock %}
+
+{% block Body %}
+    <div class="bg-gray-200 flex content-center justify-center h-full items-center">
+        <div class="bg-white shadow-lg max-w-lg md:flex">
+            <div class="p-4">
+                <h1 class="text-2xl font-bold text-gray-800 mb-4">Page de création de compte</h1>
+                <form action="{% url 'Register' %}?key={{ key }}" method="post">
+                    {% csrf_token %}
+                    <div class="mb-4">
+                        <label for="username" class="block text-gray-600 mb-2">Nom d'utilisateur :</label>
+                        <input id="username" name="username" type="text" class="border shadow-inner py-2 px-3 text-gray-700 w-full focus:shadow-outline">
+                    </div>
+                    <div class="mb-4">
+                        <label for="email" class="block text-gray-600 mb-2">Email :</label>
+                        <input id="email" name="email" type="text" class="border shadow-inner py-2 px-3 text-gray-700 w-full focus:shadow-outline">
+                    </div>
+                    <div class="mb-4">
+                        <label for="password1" class="block text-gray-600 mb-2">Mot de passe :</label>
+                        <input id="password1" name="password1" type="password" class="border shadow-inner py-2 px-3 text-gray-700 w-full focus:shadow-outline">
+                    </div>
+                    <div class="mb-4">
+                        <label for="password2" class="block text-gray-600 mb-2">Confirmer mot de passe :</label>
+                        <input id="password2" name="password2" type="password" class="border shadow-inner py-2 px-3 text-gray-700 w-full focus:shadow-outline">
+                    </div>
+                    <div class="mb-4">
+                        <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Créer le compte</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

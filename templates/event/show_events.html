@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block Body %}
+    <p class="text-3xl">Prochaine dates :</p>
+    <ul class="ml-8">
+        {% for event in events %}
+            <li class="text-xl"><span class="font-bold">{{ event.date }}</span> : {{ event.name }}</li>
+        {% endfor %}
+    </ul>
+
+
+{% endblock %}

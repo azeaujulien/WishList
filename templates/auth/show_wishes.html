@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block Body %}
+    {% for wish in wishes %}
+        <p>{{ wish }}</p>
+        {% for product in wish.products %}
+            <p class="ml-8">{{ product }}</p>
+        {% endfor %}
+    {% endfor %}
+
+    <br>
+
+    {% for wish in my_wishes %}
+        <p>{{ wish }}</p>
+        {% for product in wish.products %}
+            <p class="ml-8">{{ product }}</p>
+        {% endfor %}
+    {% endfor %}
+{% endblock %}

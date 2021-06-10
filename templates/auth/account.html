@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block Body %}
+    <div class="m-5 text-2xl">
+        <p><span class="font-bold">Pseudo</span> : {{ user.username }}</p>
+        <p><span class="font-bold">Email</span> : {{ user.email }}</p>
+        <div class="mt-4">
+            <a href="{% url 'Logout' %}" class="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-800">Se déconnecter</a>
+        </div>
+    </div>
+{% endblock %}

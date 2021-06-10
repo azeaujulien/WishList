@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+
+{% block Body %}
+    <div class="bg-gray-800 flex content-center justify-center h-full items-center">
+        <div class="bg-white shadow-lg max-w-lg md:flex">
+            <div class="p-4">
+                <h1 class="text-2xl font-bold text-gray-800 mb-4">Création de voeux</h1>
+                <form method="POST">
+                    {% csrf_token %}
+
+                    <div class="mb-4">
+                        <label for="name" class="block text-gray-600 mb-2">Nom :</label>
+                        <input id="name" name="name" type="text" class="border shadow-inner py-2 px-3 text-gray-700 w-full focus:shadow-outline">
+                        <p class="text-red-600 text-sm">{{ username_error }}</p>
+                    </div>
+                    <div class="mb-4">
+                        <label for="description" class="block text-gray-600 mb-2">Mot de passe :</label>
+                        <textarea id="description" name="description" class="border shadow-inner py-2 px-3 text-gray-700 w-full focus:shadow-outline" cols="100" rows="10"></textarea>
+                        <p class="text-red-600 text-sm">{{ password_error }}</p>
+                    </div>
+
+                     <div class="mb-4">
+                         <label for="is_series">C'est une série ?</label>
+                        <input id="is_series" name="is_series" type="checkbox"/>
+                     </div>
+
+                    <div id="number-holder" class="mb-4" hidden>
+                        <label for="start_number">Premier numéro (tomes, etc...) : </label>
+                        <input id="start_number" name="start_number" type="number"/>
+                         <label for="end_number">Dernier numéro (tomes, etc...) : </label>
+                        <input id="end_number" name="end_number" type="number"/>
+                     </div>
+
+                    <div class="mb-4">
+                        <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Créer un voeux</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block JS %}
+    <script>
+        let isSeriesCheckBox = document.querySelector("#is_series")
+        let startNumberInput = document.querySelector("#start_number")
+        let endNumberInput = document.querySelector("#end_number")
+        let numberHolder = document.querySelector("#number-holder")
+        let isSeries = false
+
+        startNumberInput.value = 0
+        endNumberInput.value = 1
+
+        isSeriesCheckBox.addEventListener('change', (e) => {
+            numberHolder.hidden = isSeries
+            isSeries = !isSeries
+        })
+        startNumberInput.addEventListener('change', (e) => {
+
+            if (parseInt(e.target.value) < 0) {
+                e.target.value = 0
+            } else if (parseInt(e.target.value) >= parseInt(endNumberInput.value)) {
+                endNumberInput.value = parseInt(e.target.value) + 1
+            }
+        })
+        endNumberInput.addEventListener('change', (e) => {
+            if (parseInt(e.target.value) <= 1) {
+                e.target.value = 1
+            }
+
+            if (parseInt(e.target.value) <= parseInt(startNumberInput.value)) {
+                startNumberInput.value = parseInt(e.target.value) - 1
+            }
+        })
+
+    </script>
+{% endblock %}
